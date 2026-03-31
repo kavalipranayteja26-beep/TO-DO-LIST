@@ -13,35 +13,45 @@
     <div id="app">
       <!-- Setup Screen (shown if no plan exists for tomorrow/today) -->
       <section id="setup-screen" class="screen hidden">
-        <div class="glass-panel">
-          <h1>Plan Your Day</h1>
-          <p>Let's map out tomorrow's tasks & habits.</p>
+        <div class="glass-panel wizard-container">
+          <div class="buddy-header">
+            <div class="buddy-icon">🌿</div>
+            <div class="buddy-message" id="buddy-bubble">Hi! Let's get you ready for tomorrow. What's the main task on your mind?</div>
+          </div>
           
-          <div class="form-group">
-            <label>Add a Task</label>
+          <div id="step-tasks" class="wizard-step">
             <div class="input-row">
               <input type="text" id="task-name" placeholder="E.g., Morning workout" />
               <input type="time" id="task-time" />
               <button id="add-task-btn" class="btn-primary">+</button>
             </div>
+            <ul id="setup-task-list" class="task-list"></ul>
+            <button class="btn-secondary next-step" data-next="step-meds">Next: Medications →</button>
           </div>
-          
-          <ul id="setup-task-list" class="task-list"></ul>
 
-          <div class="habit-settings">
-            <label>Water Needs (glasses)</label>
-            <input type="number" id="water-goal" value="8" min="1" max="15" />
-            
-            <label>Medicine Intakes (name & time)</label>
+          <div id="step-meds" class="wizard-step hidden">
             <div class="input-row">
               <input type="text" id="med-name" placeholder="Vitamin C" />
               <input type="time" id="med-time" />
               <button id="add-med-btn" class="btn-primary">+</button>
             </div>
             <ul id="setup-med-list" class="task-list"></ul>
+            <div class="wizard-buttons">
+              <button class="btn-text prev-step" data-prev="step-tasks">← Back</button>
+              <button class="btn-secondary next-step" data-next="step-water">Next: Hydration →</button>
+            </div>
           </div>
-          
-          <button id="save-plan-btn" class="btn-success">Finalize Plan</button>
+
+          <div id="step-water" class="wizard-step hidden">
+            <div class="form-group center-content">
+              <label>How many glasses of water should we aim for?</label>
+              <input type="number" id="water-goal" value="8" min="1" max="15" class="large-input" />
+            </div>
+            <div class="wizard-buttons">
+              <button class="btn-text prev-step" data-prev="step-meds">← Back</button>
+              <button id="save-plan-btn" class="btn-success">Finalize My Day! ✨</button>
+            </div>
+          </div>
         </div>
       </section>
 

@@ -45,6 +45,12 @@ const dashboardTaskList = document.getElementById('dashboard-task-list');
 const waterGlassesContainer = document.getElementById('water-glasses');
 const dashboardMedList = document.getElementById('dashboard-med-list');
 
+// Wizard Elements
+const buddyBubble = document.getElementById('buddy-bubble');
+const wizardSteps = document.querySelectorAll('.wizard-step');
+const nextBtns = document.querySelectorAll('.next-step');
+const prevBtns = document.querySelectorAll('.prev-step');
+
 // Temporary setup state before saving
 let setupTasks = appState.tasks.length ? [...appState.tasks] : [];
 let setupMeds = appState.medicines.length ? [...appState.medicines] : [];
@@ -68,6 +74,12 @@ function init() {
 function showSetup() {
   setupScreen.classList.remove('hidden');
   dashboardScreen.classList.add('hidden');
+  
+  // Reset wizard to first step
+  wizardSteps.forEach(s => s.classList.add('hidden'));
+  document.getElementById('step-tasks').classList.remove('hidden');
+  updateBuddyMessage('step-tasks');
+  
   renderSetupLists();
 }
 
@@ -98,6 +110,34 @@ addMedBtn.addEventListener('click', () => {
   medNameInput.value = '';
   medTimeInput.value = '';
   renderSetupLists();
+});
+
+// ---- Wizard Flow ----
+function updateBuddyMessage(stepId) {
+  const messages = {
+    'step-tasks': "Hi! Let's get you ready for tomorrow. What's the main task on your mind? 📝",
+    'step-meds': "Got it! Health is wealth. Any medications we should schedule? 💊",
+    'step-water': "Almost there! Finally, how many glasses of water are we aiming for? 💧"
+  };
+  buddyBubble.textContent = messages[stepId] || "Let's finish up!";
+}
+
+nextBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const nextStepId = btn.getAttribute('data-next');
+    wizardSteps.forEach(s => s.classList.add('hidden'));
+    document.getElementById(nextStepId).classList.remove('hidden');
+    updateBuddyMessage(nextStepId);
+  });
+});
+
+prevBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const prevStepId = btn.getAttribute('data-prev');
+    wizardSteps.forEach(s => s.classList.add('hidden'));
+    document.getElementById(prevStepId).classList.remove('hidden');
+    updateBuddyMessage(prevStepId);
+  });
 });
 
 savePlanBtn.addEventListener('click', () => {

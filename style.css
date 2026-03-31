@@ -116,11 +116,25 @@ button:active {
   color: white;
 }
 
+.btn-secondary {
+  background: var(--color-primary-light);
+  color: var(--color-text);
+  border: 1px solid var(--color-primary);
+  display: block;
+  width: fit-content;
+  margin: 1rem 0 0 auto;
+}
+
+.btn-text {
+  background: transparent;
+  color: var(--color-text-light);
+  padding: 0.5rem 1rem;
+}
+
 .btn-success {
   background: var(--color-primary-dark);
   color: white;
   width: 100%;
-  margin-top: 2rem;
 }
 
 .btn-icon {
@@ -303,11 +317,81 @@ button:active {
   100% { opacity: 1; }
 }
 
-header {
+/* Wizard Styles */
+.buddy-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  animation: slideUp 0.8s ease-out;
+}
+
+.buddy-icon {
+  font-size: 3rem;
+  background: var(--color-white);
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+.buddy-message {
+  background: var(--color-primary-light);
+  padding: 1.2rem;
+  border-radius: 20px 20px 20px 5px;
+  position: relative;
+  font-weight: 400;
+  line-height: 1.5;
+  max-width: 80%;
+  box-shadow: 2px 4px 12px rgba(0,0,0,0.03);
+}
+
+.buddy-message::after {
+  content: '';
+  position: absolute;
+  left: -10px;
+  bottom: 0;
+  border-width: 10px 10px 0 0;
+  border-style: solid;
+  border-color: var(--color-primary-light) transparent transparent transparent;
+}
+
+.wizard-step {
+  animation: fadeIn 0.4s ease-out;
+}
+
+.wizard-buttons {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-top: 2rem;
+}
+
+.large-input {
+  font-size: 2rem;
+  width: 100px;
+  text-align: center;
+  display: block;
+  margin: 1.5rem auto;
+}
+
+.center-content {
+  text-align: center;
+}
+
+.next-step {
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .dashboard-grid {
